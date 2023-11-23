@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from email_validator import validate_email, EmailNotValidError
 import datetime
 
+# Валидаторы и класс для пeренятия значений query
+
 def emailValidator(email):
     try:
         validate_email(email)
@@ -40,10 +42,6 @@ class Form():
         self.phone = phone
         self.date = date
         self.text = text
-
-    def createTypeField():
-        pass
-
 
 if __name__ == '__main__':
     form = Form('lobarev_danya@mail.ru', '79122955689', '2.12.2003', '1')

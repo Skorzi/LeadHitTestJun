@@ -7,13 +7,7 @@ from tinydb import TinyDB, Query
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+# Функция, принимающая post запрос с query параметрами
 
 @app.post("/get_form/{query}")
 def return_form_or_field(query):
@@ -50,7 +44,7 @@ def return_form_or_field(query):
     for key, value in query_parse.items():
         if key not in standart_queries:
             query_parse[key] = 'NoneField'
-            
+
     num_of_table = checkQueryDB(FormCheck)
 
     if num_of_table is not None:

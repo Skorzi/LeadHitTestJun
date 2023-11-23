@@ -1,6 +1,7 @@
 from tinydb import TinyDB, Query
 from formchecker import Form
 
+# Работа с базой
 
 def checkQueryDB(form):
 
@@ -13,13 +14,13 @@ def checkQueryDB(form):
         if value is not None:
             dict_form[key] = value
 
-
     for key, value in dict_form.items():
     # Создаем запрос к таблице для поиска элемента с заданным ключом и значением
         result = db.search(Form_queries[key] == value)
         if not result:
             print(f"Элемент с ключом '{key}' и значением '{value}' не найден в таблице")
     
+    # На случай, если все query = None
     try:
         for t in result:
             for key, value in dict_form.items():
