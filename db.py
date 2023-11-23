@@ -13,18 +13,22 @@ def checkQueryDB(form):
         if value is not None:
             dict_form[key] = value
 
+
     for key, value in dict_form.items():
     # Создаем запрос к таблице для поиска элемента с заданным ключом и значением
         result = db.search(Form_queries[key] == value)
         if not result:
             print(f"Элемент с ключом '{key}' и значением '{value}' не найден в таблице")
-
-    for t in result:
-        for key, value in dict_form.items():
-            if key in t and t[key] == value:
-                pass
-            else:
-                result.remove(t)
+    
+    try:
+        for t in result:
+            for key, value in dict_form.items():
+                if key in t and t[key] == value:
+                    pass
+                else:
+                    result.remove(t)
+    except UnboundLocalError:
+        result = []
                 
     if len(result) > 0:
         return result[0].doc_id
@@ -32,5 +36,5 @@ def checkQueryDB(form):
         return None
 
 if __name__ == '__main__':
-    form = Form("", '', '', 'q')
+    form = Form(phone='7912295568')
     print(checkQueryDB(form))
